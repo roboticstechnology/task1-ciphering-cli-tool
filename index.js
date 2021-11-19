@@ -1,86 +1,40 @@
+import { pipeline } from 'stream';
+import { CustomWriteablemStream } from './streams/writeableStream.js';
+import { CustomReadablemStream } from './streams/readableStream.js';
+import { CustomTransformStream } from './streams/transformStream.js';
+import { validate, configParamsValidate } from './validate/validate.js';
+
 const log = console.log;
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-const fsAccess = util.promisify(fs.access);
-
-
-
-class CustomExceptionValidate extends Error {
-
-    constructor(message, name = 'exception in validate ClI options') {
-        super(message);
-        this.name = name;
-        log(this.constructor.name);
-    }
-}
-
-class CustomExceptionExistsFile extends Error {
-
-    constructor(message, path, _name = 'NoExistsFile') {
-        super(message);
-        this.path = path;
-        this.name = _name;
-
-    }
-}
-
+//'E:\\_NONDE\\RR_NODE_2021Q4\\task1-ciphering-cli-tool/input.txt1'
 const run = async () => {
     try {
+        const CLIParams = await validate();
+        // log(CLIParams);
+        const configParams = configParamsValidate(CLIParams['-c']);
+        // log(configParams);
+        let transformStreamArr = configParams.map(el => new CustomTransformStream(el));
 
-        log(process.argv)
-        const CLIoptions = {};
-        let ind = 0;
-        for (const element of process.argv) {
+        const inputStream = CLIParams['-i'] ? new CustomReadablemStream('./input.txt') : process.stdin;
+        const outputStream = CLIParams['-o'] ? new CustomWriteablemStream('./output.txt') : process.stdout;
 
-            if (element === '-c' || element === '--config') {
+        // log(transformStreamArr)
 
-                if (CLIoptions.hasOwnProperty('-c')) throw new CustomExceptionValidate('duplicated option -c', 'ValidateDublicatedOptionsError');
-                CLIoptions['-c'] = process.argv[ind + 1];
-
-            }
-
-            if (element === '-i' || element === '--input') {
-
-                if (CLIoptions.hasOwnProperty('-i')) throw new CustomExceptionValidate('duplicated option -i', 'ValidateDublicatedOptionsError');
-                try {
-                    await fsAccess(process.argv[ind + 1], fs.constants.R_OK);
-                } catch (e) {
-                    throw new CustomExceptionExistsFile(`file is not found or invalid path `, process.argv[ind + 1]);
+        pipeline(
+            inputStream,
+            ...transformStreamArr,
+            outputStream,
+            err => {
+                if (err) {
+                    console.error('Pipeline failed', err);
+                } else {
+                    console.log('Succeeded');
                 }
-                CLIoptions['-i'] = process.argv[ind + 1];
-
             }
-
-            if (element === '-o' || element === '--output') {
-
-                if (CLIoptions.hasOwnProperty('-o')) throw new CustomExceptionValidate('duplicated option -o', 'ValidateDublicatedOptionsError');
-                try {
-                    await fsAccess(process.argv[ind + 1], fs.constants.W_OK);
-                } catch (e) {
-                    throw new CustomExceptionExistsFile(`file is not found or invalid path`, process.argv[ind + 1]);
-                }
-                CLIoptions['-o'] = process.argv[ind + 1];
-            }
-
-            ind += 1;
-
-        };
-
-        log(' CLIoptions = ', CLIoptions);
+        )
     } catch (e) {
-        log(e);
-        if (e instanceof CustomExceptionValidate) {
-            process.stderr.write(`${e.name}: ${e.message}`);
-            process.exit(666);
-        }
-        if (e instanceof CustomExceptionExistsFile) {
-            process.stderr.write(`${e.name}: ${e.message}`);
-            process.stderr.write(`${e.path}`);
-            process.exit(666);
-        }
-
+        log(e.message);
     }
 }
+
 
 run();

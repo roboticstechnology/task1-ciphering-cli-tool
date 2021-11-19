@@ -1,21 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-import { pipeline } from 'stream';
-import { CustomWriteablemStream } from './streams/writeableStream.js';
-import { CustomReadablemStream } from './streams/readableStream.js';
-import { CustomTransformStream } from './streams/transformStream.js';
-const fsAccess = util.promisify(fs.access);
 const log = console.log;
 
-
-
-const chipier = (data, offset) => {
+export const chipierCaesar = (data, offset) => {
 
     const ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const ALPHABET_LOWERCASE = ALPHABET_UPPERCASE.toLowerCase();
     const ALPHABET_SIZE = ALPHABET_UPPERCASE.length;
-    log(ALPHABET_LOWERCASE, ALPHABET_SIZE);
+    // log(ALPHABET_LOWERCASE, ALPHABET_SIZE);
 
     let result = '';
 
@@ -31,7 +21,7 @@ const chipier = (data, offset) => {
 
                 if (elemNumber < 0) {
                     elemNumber = ALPHABET_SIZE + elemNumber;
-                    log(elemNumber);
+                    // log(elemNumber);
                 }
 
                 result += ALPHABET_UPPERCASE[elemNumber];
@@ -49,7 +39,7 @@ const chipier = (data, offset) => {
 
                 if (elemNumber < 0) {
                     elemNumber = ALPHABET_SIZE + elemNumber;
-                    log(elemNumber);
+                    // log(elemNumber);
                 }
 
                 result += ALPHABET_LOWERCASE[elemNumber];
@@ -66,6 +56,3 @@ const chipier = (data, offset) => {
 
     return result;
 }
-
-log(chipier('AbC', 1));
-

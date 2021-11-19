@@ -1,25 +1,88 @@
-# https-github.com-rolling-scopes-school-basic-nodejs-course-task-1-ciphering-cli-tool
+# RSS2021-NodeJS-Task01
 
-Базовая реализация
+RSS2021-NodeJS Task 1. Ciphering CLI tool
 
-В README.md должно быть описано, как можно запустить программу из командной строки, описаны аргументы, которые можно передать приложению плюс 10 баллов.
-Если переданы все аргументы и они корректны, приложение читает из файла и записывает в файл преобразованный текст, при этом предыдущие записи не удаляются плюс 20 баллов
-Приложение работает в соответствии с описанными в задании примерами плюс 30 баллов
+---
 
-Если config невалиден или отсутствует, приложение передает соответствующее сообщение в process.stderr и прoцесс завершается с кодом, отличным от 0 плюс 20 баллов. Объем валидации config:
-проверяется, что config имеет формат {XY(-)}n
-проверяется, что X соответствует одному из шифров
-проверяется, что для ROT-8 и Цезаря присутствует элемент Y
-проверяется, что для Атбаш отсутствует элемент Y
-проверяется, что Y — это 1 или 0
+CLI tool that will encode and decode a text by 3 substitution ciphers :
 
-Если не передан аргумент с путем до файла на чтение, то чтение осуществляется из process.stdin плюс 10 баллов
-Если не передан аргумент с путем до файла на запись, то вывод осуществляется в process.stdout плюс 10 баллов
-Шифруются/дешифруются только латинские буквы, регистр сохраняется, остальные символы не изменяются плюс 20 баллов
-Если текст вводится из консоли, то программа не должна завершаться после выполнения шифровки/дешифровки введенного текста, т.е. должна быть возможность ввести еще текст плюс 10 баллов
-Кодовая база не находится в одном файле, а разделена на файлы в соответствии с выполняемыми задачами (например - функция, преобразующая строку, в отдельном файле, код, создающий transform стрим, в отдельном файле, функция для парсинга и валидации аргументов в отдельном файле и т.п.) плюс 10 баллов
-Продвинутая реализация
+- Caesar cipher
+- Atbash cipher
+- ROT-8 as variation of ROT-13
 
-Чтение реализовано при помощи кастомного стрима (класс, отнаследованный от Readable) плюс 10 баллов
-Запись реализована при помощи кастомного стрима (класс, отнаследованный от Writable) плюс 10 баллов
+## How to install
 
+1. Download or clone this repository
+   > git clone https://github.com/MatusVit/RS2020-NodeJS.git
+   ###### in branch 'task01'
+   > git checkout task01
+2. Go to the app folder
+   > cd ciphering-cli-tool
+3. Install dependencies
+   > npm install
+
+## How to use
+
+Open command line in your computer, transfer to this project directory and run
+command
+
+> node ciphering-tool --config <string> --input <filename> --output <filename>
+
+CLI tool 3 options (short alias and full name):
+
+1.  **-c, --config**: config for ciphers Config is a string with pattern
+    `{XY(-)}n`, where:
+
+- `X` is a cipher mark:
+  - `C` is for Caesar cipher (with shift 1)
+  - `A` is for Atbash cipher
+  - `R` is for ROT-8 cipher
+- `Y` is flag of encoding or decoding (mandatory for Caesar cipher and ROT-8
+  cipher and should not be passed Atbash cipher)
+  - `1` is for encoding
+  - `0` is for decoding
+
+2.  **-i, --input**: a path to input file
+3.  **-o, --output**: a path to output file
+
+For example, config `"C1-C1-R0-A"` means "encode by Caesar cipher => encode by
+Caesar cipher => decode by ROT-8 => use Atbash"
+
+You can encode and decode right in STDIN and get STDOUT by passing only
+**--config**
+
+<!-- todo -->
+
+## Examples of usage
+
+```bash
+$ node ciphering-tool -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
+```
+
+> input.txt `This is secret. Message about "_" symbol!`
+
+> output.txt `Myxn xn nbdobm. Tbnnfzb ferlm "_" nhteru!`
+
+```bash
+$ node ciphering-tool -c "C1-C0-A-R1-R0-A-R0-R0-C1-A" -i "./input.txt" -o "./output.txt"
+```
+
+> input.txt `This is secret. Message about "_" symbol!`
+
+> output.txt `Vhgw gw wkmxkv. Ckwwoik onauv "_" wqcnad!`
+
+```bash
+$ node ciphering-tool -c "A-A-A-R1-R0-R0-R0-C1-C1-A" -i "./input.txt" -o "./output.txt"
+```
+
+> input.txt `This is secret. Message about "_" symbol!`
+
+> output.txt `Hvwg wg gsqfsh. Asggous opcih "_" gmapcz!`
+
+```bash
+$ node ciphering-tool -c "C1-R1-C0-C0-A-R0-R1-R1-A-C1" -i "./input.txt" -o "./output.txt"
+```
+
+> input.txt `This is secret. Message about "_" symbol!`
+
+> output.txt `This is secret. Message about "_" symbol!`

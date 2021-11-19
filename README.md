@@ -13,11 +13,11 @@ CLI tool that will encode and decode a text by 3 substitution ciphers :
 ## How to install
 
 1. Download or clone this repository
-   > git clone https://github.com/MatusVit/RS2020-NodeJS.git
-   ###### in branch 'task01'
-   > git checkout task01
+   > git clone https://github.com/roboticstechnology/task1-ciphering-cli-tool.git
+   ###### in branch 'task-1-ciphering-cli-tool'
+   > git checkout task-1-ciphering-cli-tool
 2. Go to the app folder
-   > cd ciphering-cli-tool
+   > cd task-1-ciphering-cli-tool
 3. Install dependencies
    > npm install
 
@@ -56,7 +56,7 @@ You can encode and decode right in STDIN and get STDOUT by passing only
 ## Examples of usage
 
 ```bash
-$ node ciphering-tool -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
+$ node index.js -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
 ```
 
 > input.txt `This is secret. Message about "_" symbol!`
@@ -64,7 +64,7 @@ $ node ciphering-tool -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
 > output.txt `Myxn xn nbdobm. Tbnnfzb ferlm "_" nhteru!`
 
 ```bash
-$ node ciphering-tool -c "C1-C0-A-R1-R0-A-R0-R0-C1-A" -i "./input.txt" -o "./output.txt"
+$ node index.js -c "C1-C0-A-R1-R0-A-R0-R0-C1-A" -i "./input.txt" -o "./output.txt"
 ```
 
 > input.txt `This is secret. Message about "_" symbol!`
@@ -72,7 +72,7 @@ $ node ciphering-tool -c "C1-C0-A-R1-R0-A-R0-R0-C1-A" -i "./input.txt" -o "./out
 > output.txt `Vhgw gw wkmxkv. Ckwwoik onauv "_" wqcnad!`
 
 ```bash
-$ node ciphering-tool -c "A-A-A-R1-R0-R0-R0-C1-C1-A" -i "./input.txt" -o "./output.txt"
+$ node index.js -c "A-A-A-R1-R0-R0-R0-C1-C1-A" -i "./input.txt" -o "./output.txt"
 ```
 
 > input.txt `This is secret. Message about "_" symbol!`
@@ -80,7 +80,7 @@ $ node ciphering-tool -c "A-A-A-R1-R0-R0-R0-C1-C1-A" -i "./input.txt" -o "./outp
 > output.txt `Hvwg wg gsqfsh. Asggous opcih "_" gmapcz!`
 
 ```bash
-$ node ciphering-tool -c "C1-R1-C0-C0-A-R0-R1-R1-A-C1" -i "./input.txt" -o "./output.txt"
+$ node index.js -c "C1-R1-C0-C0-A-R0-R1-R1-A-C1" -i "./input.txt" -o "./output.txt"
 ```
 
 > input.txt `This is secret. Message about "_" symbol!`

@@ -50,10 +50,10 @@ export const validate = async () => {
 
         // log(' CLIoptions = ', CLIoptions);
         return CLIoptions;
-        
+
     } catch (e) {
 
-       //  log(e);
+        //  log(e);
         if (e instanceof CustomExceptionValidate) {
             process.stderr.write(`${e.name}: ${e.message}`);
             process.exit(666);

@@ -17,6 +17,14 @@
   "bugs": {
     "url": "https://github.com/roboticstechnology/task1-ciphering-cli-tool/issues"
   },
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/coverage/**"
+    ]
+  },
   "homepage": "https://github.com/roboticstechnology/task1-ciphering-cli-tool#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",

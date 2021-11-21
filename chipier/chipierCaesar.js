@@ -21,7 +21,7 @@ export const chipierCaesar = (data, offset) => {
 
                 if (elemNumber < 0) {
                     elemNumber = ALPHABET_SIZE + elemNumber;
-                    // log(elemNumber);
+                     log(elemNumber);
                 }
 
                 result += ALPHABET_UPPERCASE[elemNumber];

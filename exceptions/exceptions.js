@@ -4,7 +4,6 @@ class CustomExceptionValidate extends Error {
     constructor(message, name = 'exception in validate ClI options') {
         super(message);
         this.name = name;
-        // log(this.constructor.name);
     }
 }
 

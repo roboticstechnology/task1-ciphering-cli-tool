@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1637508883001" clover="3.2.0">
-  <project timestamp="1637508883002" name="All files">
-    <metrics statements="155" coveredstatements="66" conditionals="80" coveredconditionals="26" methods="18" coveredmethods="3" elements="253" coveredelements="95" complexity="0" loc="155" ncloc="155" packages="5" files="9" classes="9"/>
+<coverage generated="1637510960896" clover="3.2.0">
+  <project timestamp="1637510960896" name="All files">
+    <metrics statements="155" coveredstatements="71" conditionals="80" coveredconditionals="28" methods="18" coveredmethods="5" elements="253" coveredelements="104" complexity="0" loc="155" ncloc="155" packages="5" files="9" classes="9"/>
     <package name="task1-ciphering-cli-tool">
       <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="index.js" path="E:\_NONDE\RR_NODE_2021Q4\task1-ciphering-cli-tool\index.js">
@@ -101,14 +101,14 @@
       </file>
     </package>
     <package name="task1-ciphering-cli-tool.exceptions">
-      <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="exceptions.js" path="E:\_NONDE\RR_NODE_2021Q4\task1-ciphering-cli-tool\exceptions\exceptions.js">
-        <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
       </file>
     </package>
     <package name="task1-ciphering-cli-tool.streams">

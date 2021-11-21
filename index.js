@@ -27,7 +27,7 @@ const run = async () => {
                 if (err) {
                     console.error('Pipeline failed', err);
                 } else {
-                    console.log('Succeeded');
+                    log('Succeeded');
                 }
             }
         )

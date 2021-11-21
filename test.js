@@ -1,71 +1,15 @@
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-import { pipeline } from 'stream';
-import { CustomWriteablemStream } from './streams/writeableStream.js';
-import { CustomReadablemStream } from './streams/readableStream.js';
-import { CustomTransformStream } from './streams/transformStream.js';
-const fsAccess = util.promisify(fs.access);
+import { chipierAtbash } from './chipier/chipierAtbash.js';
+
 const log = console.log;
 
+describe('Test Chipiers', () => {
+    log('Test Chipiers');
 
-
-const chipier = (data, offset) => {
-
-    const ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const ALPHABET_LOWERCASE = ALPHABET_UPPERCASE.toLowerCase();
-    const ALPHABET_SIZE = ALPHABET_UPPERCASE.length;
-    log(ALPHABET_LOWERCASE, ALPHABET_SIZE);
-
-    let result = '';
-
-    for (const char of data) {
-        // проверка символа на пренадлежность к лотинице и регистру
-        if (char === char.toUpperCase()) {
-
-            const charIndex = ALPHABET_UPPERCASE.indexOf(char);
-
-            if (charIndex > -1) {
-
-                let elemNumber = (charIndex + offset) % ALPHABET_SIZE;
-
-                if (elemNumber < 0) {
-                    elemNumber = ALPHABET_SIZE + elemNumber;
-                    log(elemNumber);
-                }
-
-                result += ALPHABET_UPPERCASE[elemNumber];
-
-            } else {
-                result += char;
-            }
-        } else {
-
-            const charIndex = ALPHABET_LOWERCASE.indexOf(char);
-
-            if (charIndex > -1) {
-
-                let elemNumber = (charIndex + offset) % ALPHABET_SIZE;
-
-                if (elemNumber < 0) {
-                    elemNumber = ALPHABET_SIZE + elemNumber;
-                    log(elemNumber);
-                }
-
-                result += ALPHABET_LOWERCASE[elemNumber];
-
-            } else {
-                result += char;
-            }
-
-        }
-
-
-
-    }
-
-    return result;
-}
-
-log(chipier('AbC', 1));
-
+    describe('test chipier Atbash', () => {
+        log('test chipier Atbash');
+        test('test char upperCase', () => {
+            log('test char upperCase');
+            expect(chipierAtbash('ABC')).toEqual('ZYX');
+        });
+    });
+})

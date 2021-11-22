@@ -21,6 +21,7 @@
     "verbose": true,
     "collectCoverageFrom": [
       "**/*.js",
+      "!**/streams/**",
       "!**/node_modules/**",
       "!**/coverage/**"
     ]

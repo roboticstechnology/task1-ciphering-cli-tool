@@ -48,6 +48,13 @@ describe('Testing validate arguments', () => {
 
         });
 
+        test('correct parsing cli params', async () => {
+            process.argv = ['node', 'myapp ', '-c', 'A', '-i', './input.txt', '-o', './output.txt'];
+            await run();
+            expect(mockExit).not.toHaveBeenCalledWith(1);
+
+        });
+
 
     });
 

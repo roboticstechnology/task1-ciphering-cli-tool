@@ -24,11 +24,11 @@ export const run = async () => {
             ...transformStreamArr,
             outputStream,
             err => {
-                if (err) {
-                    console.error('Pipeline failed', err);
-                } else {
-                    log('Succeeded');
-                }
+                // if (err) {
+                //     console.error('Pipeline failed', err);
+                // } else {
+                //     log('Succeeded');
+                // }
             }
         )
     } catch (e) {

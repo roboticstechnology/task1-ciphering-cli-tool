@@ -74,17 +74,21 @@ export const configParamsValidate = configValue => {
 
         let resultParams = [];
         if (!configValue) throw new CustomExceptionValidate('config option is empty', 'ValidateConfigOptionError');
-        if (configValue.length <= 2 && CHIPHER_TYPES.includes(configValue)) resultParams.push(configValue);
+        if (configValue.length <= 2 && CHIPHER_TYPES.includes(configValue)) {
+            resultParams.push(configValue);
+            return resultParams;
+        }
         if (configValue.length > 2) {
             const configParams = configValue.split('-');
             for (const el of configParams) {
-                if (!CHIPHER_TYPES.includes(el)) throw new CustomExceptionValidate(`invalid format config options (${el})`, 'ValidateConfigOptionError');
+                //(${el})
+                if (!CHIPHER_TYPES.includes(el)) throw new CustomExceptionValidate(`invalid format config options `, 'ValidateConfigOptionError');
             }
-            resultParams = configParams;
+            return resultParams = configParams;
         }
-        return resultParams;
+        //return resultParams;
     } catch (e) {
-        //log(e);
+        // log(e);
         if (e instanceof CustomExceptionValidate) {
             process.stderr.write(`${e.name}: ${e.message}`);
             process.exit(666);

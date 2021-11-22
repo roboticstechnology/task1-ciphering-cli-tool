@@ -53,26 +53,23 @@ describe('Testing validate arguments', () => {
 
     });
 
-    test('config value is empty', async () => {
+    test('config value is empty', () => {
       try {
         configParamsValidate([]);
       } catch (error) {
         expect(error.message).toMatch('config option is empty');
         expect(mockExit).toHaveBeenCalledWith(1);
       }
-
     });
 
-    test('config value is correctly and size = 2', async () => {
-
-      expect(configParamsValidate(['C0'])).toEqual([]);
+    test('config value is correctly and size = 2', () => {
+      expect(configParamsValidate('C0')).toEqual(['C0']);
     })
 
-    test('config value is correctly and size >2', async () => {
-
-      expect(configParamsValidate(['C0-A1'])).toEqual([]);
+    test('config value is correctly and size >2', () => {
+      expect(configParamsValidate('C0-A')).toEqual(['C0', 'A']);
     })
-
 
   });
+
 });
